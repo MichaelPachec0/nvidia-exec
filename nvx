@@ -9,7 +9,7 @@ function devices {
         -disable memory -disable network -disable pcmcia -disable scsi -disable spd -disable usb \
         -class bridge -class display \
         -json \
-        2>/dev/null |
+        2>/dev/null | perl -0777 -pe 's/,(\s|\n)*?](\s|\n)*?},/]}/p' |
         jq -c '
             .. |
             objects |
